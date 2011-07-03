@@ -8,18 +8,25 @@
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #e1e1f1;
+      background-color: #f1f1ff;
       font-family: Helvetica, Arial, FreeSans, san-serif;
       color: #000000;
     }
     #container {
       margin: 0 auto;
-      width: 700px;
+      width: 1000px;
+    }
+    h1 {
+        border-top: 3px solid #1e2608;
+        margin-top: 30px;
+        padding-top: 30px;
     }
     h1.title {
         font-size: 2.5em;
         color: #1e2608;
         margin-bottom: 3px;
+        padding-top: 0;
+        border-top: none;
     }
     h1 .small {
         font-size: 0.4em;
@@ -50,6 +57,10 @@
         background: #000;
         color: #fff;
         padding: 15px;
+    }
+    .gist pre {
+        color: #000;
+        font-size: 0.8em;
     }
     hr {
         border: 0;
@@ -86,7 +97,7 @@
   <div id="container">
 
     <div class="download">
-      <a href="http://github.com/downloads/splix/grails-spring-security-twitter/grails-spring-security-twitter-0.2.zip">
+      <a href="http://github.com/downloads/splix/grails-spring-security-twitter/grails-spring-security-twitter-0.3.zip">
         <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
     </div>
 
@@ -101,35 +112,56 @@
         Grails plugin for Twitter Authentication, as extension to <a href="http://www.grails.org/plugin/spring-security-core">Grails Spring Security Core plugin</a>
     </p>
 
-    <h2>Dependencies</h2>
+    <h1>Dependencies</h1>
     <ul>
         <li>grails 1.3+</li>
         <li>spring-security-core plugin 1.1+</li>
         <li>twitter4j (will be downloaded automatically)</li>
     </ul>
 
-    <h2>Install</h2>
+    <h1>Install</h1>
 
-    <h3>Install spring-security-plugin:</h3>
+    <h2>Install spring-security-plugin:</h2>
 
     <pre>$ grails install-plugin spring-security-core</pre>
 
     <p>
-        Download package from github: <a href="http://github.com/downloads/splix/grails-spring-security-twitter/grails-spring-security-twitter-0.2.zip">grails-spring-security-twitter-0.2.zip</a>.
+        Download package from github: <a href="http://github.com/downloads/splix/grails-spring-security-twitter/grails-spring-security-twitter-0.3.zip">grails-spring-security-twitter-0.3.zip</a>.
     </p>
-    <h3>And install it:</h3>
+    <h2>And install it:</h2>
     <pre>$ grails install-plugin %PATH_TO_DOWNLOADED_ZIP%
 $ grails s2-init-twitter</pre>
 
-    <h2>License</h2>
+    <h1>How to use</h1>
+    <h2>Basic usage:</h2>
+    <p>Add CSS into your view layout:</p>
+    <pre>&lt;link rel="stylesheet" href="${resource(dir:'css',file:'twitter-auth.css')}" /&gt;</pre>
+
+    <p>Put sign-in button:</p>
+    <pre>&lt;twitterAuth:button/&gt;</pre>
+    <p>after clicking this button user will be authenticated through twitter, and redirected to main page (configurable at spring-security-core)</p>
+
+    <h2>Configuration</h2>
+    <p>After plugin install you'll get twitter keys stored in your <code>grails-app/conf/Config.groovy</code>, that can be modified later</p>
+    <h3>Default config:</h3>
+    <script src="https://gist.github.com/1062121.js?file=DefaultConfig.groovy"></script>
+    <h3>How to: use my own DAO</h3>
+    <p>You have to crate an class, that implements <code>com.the6hours.grails.springsecurity.twitter.TwitterAuthDao</code>, put
+       it as a bean into spring context (see <a href="http://grails.org/doc/latest/guide/14.%20Grails%20and%20Spring.html">docs</a>) add
+       following configuration into your <code>Config.groovy</code>:</p>
+    <pre>grails.plugins.springsecurity.twitter.beans.dao='myOwnDaoBean'</pre>
+
+
+    <h1>License</h1>
     <p>Licensed under the Apache License, Version 2.0</p>
 
-    <h2>Authors</h2>
+    <h1>Authors</h1>
     <p>
         Igor Artamonov - <a href="mailto:igor@artamonov.ru">igor@artamonov.ru</a> / <a href="http://igorartamonov.com">igorartamonov.com</a>
     </p>
 
-    <h2>Download</h2>
+
+    <h1>Download</h1>
     <p>
       You can download sources of this project in either
       <a href="http://github.com/splix/grails-spring-security-twitter/zipball/master">zip</a> or
